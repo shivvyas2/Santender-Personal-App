@@ -1,11 +1,14 @@
 import { IconSymbol } from '@/components/ui/icon-symbol';
+import { useRouter } from 'expo-router';
 import React from 'react';
 import { ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function AccountsScreen() {
+  const router = useRouter();
+
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container} edges={['top']}>
       <StatusBar barStyle="dark-content" backgroundColor="white" />
       
       {/* Header */}
@@ -15,8 +18,12 @@ export default function AccountsScreen() {
         </TouchableOpacity>
         
         <View style={styles.logoContainer}>
-          <View style={styles.santanderLogo}>
+          <View style={styles.logoRow}>
+            <View style={styles.flameIcon}>
+              <IconSymbol name="flame.fill" size={18} color="#EC0000" />
+            </View>
             <Text style={styles.logoText}>Santander</Text>
+            <Text style={styles.trademark}>®</Text>
           </View>
           <Text style={styles.lastLogin}>Last log in: 12/12/2025 at 09:46 ET</Text>
         </View>
@@ -26,178 +33,79 @@ export default function AccountsScreen() {
         </TouchableOpacity>
       </View>
 
-      {/* Search Bar */}
-      <View style={styles.searchContainer}>
-        <View style={styles.searchBar}>
-          <Text style={styles.searchPlaceholder}>What are you looking for?</Text>
+      <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
+        {/* Promotional Banner */}
+        <View style={styles.promoBanner}>
+          <View style={styles.promoContent}>
+            <Text style={styles.promoTitle}>You've got a better way to bank.</Text>
+            <Text style={styles.promoSubtitle}>Explore your Santander Select® Checking benefits.</Text>
+            <Text style={styles.promoFooter}>Member FDIC</Text>
+          </View>
+          <TouchableOpacity style={styles.promoButton}>
+            <Text style={styles.promoButtonText}>Learn{'\n'}more</Text>
+          </TouchableOpacity>
         </View>
-        <TouchableOpacity style={styles.helpButton}>
-          <IconSymbol name="questionmark" size={20} color="white" />
+
+        {/* FDIC Notice */}
+        <View style={styles.fdicNotice}>
+          <Text style={styles.fdicLogo}>FDIC</Text>
+          <Text style={styles.fdicText}>FDIC-Insured - Backed by the full faith and credit of the U.S. Government.</Text>
+        </View>
+
+        {/* Account Card */}
+        <View style={styles.accountCard}>
+          <Text style={styles.accountType}>Select Checking (*7525)</Text>
+          <View style={styles.balanceRow}>
+            <Text style={styles.balancePrefix}>-</Text>
+            <Text style={styles.balanceDollar}>$</Text>
+            <Text style={styles.balanceAmount}>218.</Text>
+            <Text style={styles.balanceCents}>25</Text>
+          </View>
+          <Text style={styles.balanceLabel}>AVAILABLE BALANCE</Text>
+        </View>
+
+        {/* Open Account Button */}
+        <TouchableOpacity style={styles.openAccountButton}>
+          <IconSymbol name="plus" size={18} color="#EC0000" />
+          <Text style={styles.openAccountText}>Open an Account</Text>
         </TouchableOpacity>
-      </View>
 
-      {/* Quick Actions */}
-      <View style={styles.quickActionsContainer}>
-        <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.quickActions}>
-          <TouchableOpacity style={styles.actionButton}>
-            <IconSymbol name="plus" size={16} color="#EC0000" />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.actionButton}>
-            <Text style={styles.actionText}>Send | Zelle®</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.actionButton}>
-            <Text style={styles.actionText}>Deposit checks</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.actionButton}>
-            <Text style={styles.actionText}>Pay bills</Text>
-          </TouchableOpacity>
-        </ScrollView>
-      </View>
-
-      {/* Accounts Section */}
-      <ScrollView style={styles.accountsSection} showsVerticalScrollIndicator={false}>
-        <View style={styles.sectionHeader}>
-          <Text style={styles.sectionTitle}>Accounts</Text>
+        {/* Messages and Offers Section */}
+        <View style={styles.messagesHeader}>
+          <Text style={styles.messagesTitle}>MESSAGES AND OFFERS</Text>
           <TouchableOpacity>
-            <IconSymbol name="ellipsis" size={20} color="#999999" />
+            <Text style={styles.viewOffersText}>VIEW 5 OFFERS</Text>
           </TouchableOpacity>
         </View>
 
-        {/* Bank Accounts */}
-        <View style={styles.accountCard}>
-          <View style={styles.cardHeader}>
-            <Text style={styles.cardHeaderText}>Bank accounts (2)</Text>
-          </View>
-          <View style={styles.cardContent}>
-            <TouchableOpacity style={styles.accountItem}>
-              <Text style={styles.accountName}>SANTANDER COLLEGE (...8472)</Text>
-              <IconSymbol name="chevron.right" size={16} color="#999999" />
-            </TouchableOpacity>
-            <View style={styles.balanceContainer}>
-              <View style={styles.balanceTextContainer}>
-                <Text style={styles.balanceAmount}>$12,847.32</Text>
-                <Text style={styles.balanceLabel}>Available balance</Text>
-              </View>
-              <View style={styles.verticalLine} />
-            </View>
-          </View>
+        {/* Offer Card */}
+        <View style={styles.offerCard}>
+          <Text style={styles.offerTitle}>Earn up to $600 cash back* on everything</Text>
+          <Text style={styles.offerSubtitle}>Enjoy a low APR* for easy spending and flexibility.</Text>
+          <Text style={styles.offerDescription}>
+            The Santander® Ultimate Cash Back® Card lets you pay smarter while earning 3% cash back on every purchase. With a low intro APR and no annual fee, managing your balance has never been more rewarding.
+          </Text>
+          <TouchableOpacity style={styles.applyButton}>
+            <Text style={styles.applyButtonText}>Apply Now</Text>
+          </TouchableOpacity>
+          <Text style={styles.disclaimer}>
+            *Credit card accounts are subject to approval. Click 'Apply Now' for applicable terms and conditions.
+          </Text>
         </View>
 
-        <View style={styles.accountCard}>
-          <View style={styles.cardHeader}>
-            <Text style={styles.cardHeaderText}>Business Checking</Text>
-          </View>
-          <View style={styles.cardContent}>
-            <TouchableOpacity style={styles.accountItem}>
-              <Text style={styles.accountName}>SANTANDER BUSINESS (...2951)</Text>
-              <IconSymbol name="chevron.right" size={16} color="#999999" />
-            </TouchableOpacity>
-            <View style={styles.balanceContainer}>
-              <View style={styles.balanceTextContainer}>
-                <Text style={styles.balanceAmount}>$8,429.67</Text>
-                <Text style={styles.balanceLabel}>Available balance</Text>
-              </View>
-              <View style={styles.verticalLine} />
+        {/* Credit Journey Link */}
+        <TouchableOpacity 
+          style={styles.creditJourneyCard}
+          onPress={() => router.push('/credit-journey')}
+        >
+          <View style={styles.creditJourneyLeft}>
+            <IconSymbol name="chart.bar.fill" size={24} color="#EC0000" />
+            <View style={styles.creditJourneyInfo}>
+              <Text style={styles.creditJourneyTitle}>Credit Journey</Text>
+              <Text style={styles.creditJourneySubtitle}>Check your credit score for free</Text>
             </View>
           </View>
-        </View>
-
-        {/* Credit Cards */}
-        <View style={styles.accountCard}>
-          <View style={styles.cardHeader}>
-            <Text style={styles.cardHeaderText}>Credit cards (3)</Text>
-          </View>
-          <View style={styles.cardContent}>
-            <TouchableOpacity style={styles.accountItem}>
-              <Text style={styles.accountName}>Sapphire Preferred (...7384)</Text>
-              <IconSymbol name="chevron.right" size={16} color="#999999" />
-            </TouchableOpacity>
-            
-            {/* Credit Card Image */}
-            <View style={styles.creditCard}>
-              <View style={styles.cardBackground}>
-                <View style={styles.cardPattern}>
-                  <View style={styles.cardPatternLine} />
-                  <View style={styles.cardPatternLine} />
-                  <View style={styles.cardPatternLine} />
-                </View>
-                <Text style={styles.cardText}>SAPPHIRE PREFERRED</Text>
-                <View style={styles.cardBottom}>
-                  <Text style={styles.cardVisa}>VISA</Text>
-                  <Text style={styles.cardSignature}>Signature</Text>
-                </View>
-              </View>
-            </View>
-            
-            <View style={styles.balanceContainer}>
-              <View style={styles.balanceTextContainer}>
-                <Text style={styles.balanceAmount}>$1,247.89</Text>
-                <Text style={styles.balanceLabel}>Current balance</Text>
-              </View>
-              <View style={styles.verticalLine} />
-            </View>
-            
-            <View style={styles.paymentStatus}>
-              <IconSymbol name="checkmark.circle.fill" size={16} color="#00AA00" />
-              <Text style={styles.paymentText}>You don't have a payment due right now.</Text>
-            </View>
-          </View>
-        </View>
-
-        <View style={styles.accountCard}>
-          <View style={styles.cardHeader}>
-            <Text style={styles.cardHeaderText}>Freedom Unlimited</Text>
-          </View>
-          <View style={styles.cardContent}>
-            <TouchableOpacity style={styles.accountItem}>
-              <Text style={styles.accountName}>Freedom Unlimited (...5629)</Text>
-              <IconSymbol name="chevron.right" size={16} color="#999999" />
-            </TouchableOpacity>
-            
-            <View style={styles.balanceContainer}>
-              <View style={styles.balanceTextContainer}>
-                <Text style={styles.balanceAmount}>$892.45</Text>
-                <Text style={styles.balanceLabel}>Current balance</Text>
-              </View>
-              <View style={styles.verticalLine} />
-            </View>
-            
-            <View style={styles.paymentStatus}>
-              <IconSymbol name="exclamationmark.triangle.fill" size={16} color="#FF4444" />
-              <Text style={styles.paymentText}>Payment due in 5 days - $45.00</Text>
-            </View>
-          </View>
-        </View>
-
-        <View style={styles.accountCard}>
-          <View style={styles.cardHeader}>
-            <Text style={styles.cardHeaderText}>Amazon Prime Rewards</Text>
-          </View>
-          <View style={styles.cardContent}>
-            <TouchableOpacity style={styles.accountItem}>
-              <Text style={styles.accountName}>Amazon Prime (...1847)</Text>
-              <IconSymbol name="chevron.right" size={16} color="#999999" />
-            </TouchableOpacity>
-            
-            <View style={styles.balanceContainer}>
-              <View style={styles.balanceTextContainer}>
-                <Text style={styles.balanceAmount}>$0.00</Text>
-                <Text style={styles.balanceLabel}>Current balance</Text>
-              </View>
-              <View style={styles.verticalLine} />
-            </View>
-            
-            <View style={styles.paymentStatus}>
-              <IconSymbol name="checkmark.circle.fill" size={16} color="#00AA00" />
-              <Text style={styles.paymentText}>Account in good standing</Text>
-            </View>
-          </View>
-        </View>
-
-        {/* Link External Accounts */}
-        <TouchableOpacity style={styles.linkAccounts}>
-          <Text style={styles.linkAccountsText}>Link external accounts</Text>
-          <IconSymbol name="chevron.right" size={16} color="#999999" />
+          <IconSymbol name="chevron.right" size={20} color="#888888" />
         </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
@@ -213,277 +121,275 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingHorizontal: 20,
-    paddingTop: 12,
-    paddingBottom: 16,
+    paddingHorizontal: 16,
+    paddingTop: 8,
+    paddingBottom: 12,
     backgroundColor: 'white',
     borderBottomWidth: 1,
     borderBottomColor: '#F0F0F0',
   },
   headerButton: {
     padding: 8,
-    borderRadius: 8,
   },
   logoContainer: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
-    marginHorizontal: 16,
   },
-  santanderLogo: {
+  logoRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: 4,
+  },
+  flameIcon: {
+    marginRight: 4,
   },
   logoText: {
-    fontSize: 22,
-    fontWeight: '700',
+    fontSize: 20,
+    fontWeight: '600',
     color: '#EC0000',
-    letterSpacing: 0.5,
+  },
+  trademark: {
+    fontSize: 12,
+    color: '#EC0000',
+    marginTop: -8,
   },
   lastLogin: {
-    fontSize: 12,
+    fontSize: 11,
     color: '#666666',
-    fontWeight: '400',
+    marginTop: 2,
   },
   logoutButton: {
-    paddingHorizontal: 12,
-    paddingVertical: 6,
+    paddingHorizontal: 8,
+    paddingVertical: 4,
   },
   logoutText: {
-    fontSize: 14,
-    fontWeight: '600',
-    color: '#EC0000',
-    letterSpacing: 0.5,
-  },
-  searchContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: 20,
-    marginBottom: 20,
-    backgroundColor: 'white',
-  },
-  searchBar: {
-    flex: 1,
-    backgroundColor: '#F5F5F5',
-    borderRadius: 16,
-    paddingHorizontal: 20,
-    paddingVertical: 14,
-    marginRight: 12,
-    borderWidth: 0,
-  },
-  searchPlaceholder: {
-    color: '#8E8E93',
-    fontSize: 17,
-    fontWeight: '400',
-  },
-  helpButton: {
-    padding: 12,
-    backgroundColor: '#EC0000',
-    borderRadius: 16,
-    width: 44,
-    height: 44,
-    alignItems: 'center',
-    justifyContent: 'center',
-    shadowColor: '#EC0000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.2,
-    shadowRadius: 4,
-    elevation: 3,
-  },
-  quickActionsContainer: {
-    paddingHorizontal: 20,
-    marginBottom: 0,
-  },
-  quickActions: {
-    flexDirection: 'row',
-  },
-  actionButton: {
-    backgroundColor: '#F8F8F8',
-    borderRadius: 20,
-    paddingHorizontal: 16,
-    paddingVertical: 10,
-    marginRight: 10,
-    alignItems: 'center',
-    justifyContent: 'center',
-    minHeight: 40,
-    borderWidth: 1,
-    borderColor: '#E8E8E8',
-  },
-  actionText: {
     fontSize: 13,
-    fontWeight: '600',
-    color: '#1C1C1E',
-    textAlign: 'center',
+    fontWeight: '700',
+    color: '#EC0000',
   },
-  accountsSection: {
+  content: {
     flex: 1,
-    paddingHorizontal: 20,
-    paddingTop: 0,
   },
-  sectionHeader: {
+  promoBanner: {
+    backgroundColor: '#EC0000',
     flexDirection: 'row',
+    padding: 20,
     alignItems: 'center',
-    justifyContent: 'space-between',
+  },
+  promoContent: {
+    flex: 1,
+  },
+  promoTitle: {
+    fontSize: 22,
+    fontWeight: '400',
+    color: 'white',
+    marginBottom: 4,
+  },
+  promoSubtitle: {
+    fontSize: 14,
+    color: 'rgba(255, 255, 255, 0.9)',
     marginBottom: 8,
   },
-  sectionTitle: {
-    fontSize: 28,
-    fontWeight: '800',
+  promoFooter: {
+    fontSize: 11,
+    color: 'rgba(255, 255, 255, 0.7)',
+  },
+  promoButton: {
+    backgroundColor: '#B80000',
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    borderRadius: 4,
+    marginLeft: 16,
+  },
+  promoButtonText: {
+    color: 'white',
+    fontSize: 13,
+    fontWeight: '600',
+    textAlign: 'center',
+  },
+  fdicNotice: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 16,
+    backgroundColor: '#F8F8F8',
+  },
+  fdicLogo: {
+    fontSize: 16,
+    fontWeight: '900',
     color: '#000000',
-    letterSpacing: -0.5,
+    marginRight: 12,
+    letterSpacing: 1,
+  },
+  fdicText: {
+    flex: 1,
+    fontSize: 13,
+    color: '#333333',
+    fontStyle: 'italic',
   },
   accountCard: {
     backgroundColor: 'white',
-    borderRadius: 20,
-    marginBottom: 20,
-    overflow: 'hidden',
+    margin: 16,
+    padding: 24,
+    borderRadius: 12,
+    alignItems: 'center',
     shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
+    shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.08,
     shadowRadius: 8,
     elevation: 4,
-    borderWidth: 0,
+    borderWidth: 1,
+    borderColor: '#F0F0F0',
   },
-  cardHeader: {
-    backgroundColor: '#EC0000',
-    paddingHorizontal: 20,
-    paddingVertical: 16,
-  },
-  cardHeaderText: {
-    color: 'white',
-    fontSize: 17,
-    fontWeight: '700',
-    letterSpacing: 0.3,
-  },
-  cardContent: {
-    padding: 20,
-  },
-  accountItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+  accountType: {
+    fontSize: 16,
+    fontWeight: '500',
+    color: '#333333',
     marginBottom: 12,
   },
-  accountName: {
-    fontSize: 17,
-    fontWeight: '600',
-    color: '#000000',
-    letterSpacing: 0.2,
-  },
-  balanceContainer: {
+  balanceRow: {
     flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    marginTop: 16,
-    marginBottom: 16,
-    paddingTop: 16,
-    borderTopWidth: 1,
-    borderTopColor: '#F0F0F0',
+    alignItems: 'flex-start',
+    marginBottom: 8,
   },
-  balanceTextContainer: {
-    flex: 1,
+  balancePrefix: {
+    fontSize: 32,
+    fontWeight: '300',
+    color: '#EC0000',
+    marginRight: 2,
+  },
+  balanceDollar: {
+    fontSize: 20,
+    fontWeight: '300',
+    color: '#EC0000',
+    marginTop: 4,
   },
   balanceAmount: {
-    fontSize: 36,
-    fontWeight: '800',
-    color: '#000000',
-    marginBottom: 6,
-    letterSpacing: -0.5,
+    fontSize: 48,
+    fontWeight: '300',
+    color: '#EC0000',
+  },
+  balanceCents: {
+    fontSize: 20,
+    fontWeight: '300',
+    color: '#EC0000',
+    marginTop: 4,
   },
   balanceLabel: {
-    fontSize: 15,
-    color: '#666666',
+    fontSize: 12,
     fontWeight: '500',
+    color: '#888888',
+    letterSpacing: 1,
   },
-  verticalLine: {
-    width: 1,
-    height: 40,
-    backgroundColor: '#E5E5E5',
-    marginLeft: 16,
-  },
-  creditCard: {
-    marginBottom: 16,
-    width: 80,
-    height: 50,
-  },
-  cardBackground: {
-    backgroundColor: '#1A1A1A',
-    borderRadius: 6,
-    padding: 8,
-    height: 50,
-    justifyContent: 'space-between',
-    position: 'relative',
-    overflow: 'hidden',
-  },
-  cardPattern: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    opacity: 0.3,
-  },
-  cardPatternLine: {
-    height: 1,
-    backgroundColor: '#4A90E2',
-    marginVertical: 2,
-    transform: [{ rotate: '15deg' }],
-  },
-  cardText: {
-    color: 'white',
-    fontSize: 8,
-    fontWeight: 'bold',
-    letterSpacing: 0.5,
-    marginTop: 2,
-  },
-  cardBottom: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'flex-end',
-  },
-  cardVisa: {
-    color: 'white',
-    fontSize: 10,
-    fontWeight: 'bold',
-  },
-  cardSignature: {
-    color: 'white',
-    fontSize: 6,
-  },
-  paymentStatus: {
+  openAccountButton: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 8,
+    justifyContent: 'center',
+    marginHorizontal: 16,
+    marginBottom: 24,
+    paddingVertical: 16,
+    backgroundColor: 'white',
+    borderRadius: 8,
+    borderWidth: 1,
+    borderColor: '#E0E0E0',
   },
-  paymentText: {
-    fontSize: 14,
-    color: '#000000',
+  openAccountText: {
+    fontSize: 16,
+    color: '#EC0000',
+    fontWeight: '500',
     marginLeft: 8,
   },
-  linkAccounts: {
+  messagesHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    backgroundColor: '#F5F5F5',
+  },
+  messagesTitle: {
+    fontSize: 13,
+    fontWeight: '600',
+    color: '#666666',
+    letterSpacing: 0.5,
+  },
+  viewOffersText: {
+    fontSize: 13,
+    fontWeight: '700',
+    color: '#EC0000',
+  },
+  offerCard: {
+    backgroundColor: 'white',
+    padding: 20,
+    borderBottomWidth: 1,
+    borderBottomColor: '#F0F0F0',
+  },
+  offerTitle: {
+    fontSize: 20,
+    fontWeight: '400',
+    color: '#EC0000',
+    marginBottom: 8,
+    lineHeight: 26,
+  },
+  offerSubtitle: {
+    fontSize: 16,
+    fontWeight: '400',
+    color: '#333333',
+    marginBottom: 12,
+  },
+  offerDescription: {
+    fontSize: 14,
+    color: '#666666',
+    lineHeight: 20,
+    marginBottom: 16,
+  },
+  applyButton: {
+    backgroundColor: '#EC0000',
+    paddingVertical: 14,
+    paddingHorizontal: 24,
+    borderRadius: 4,
+    alignSelf: 'flex-start',
+    marginBottom: 12,
+  },
+  applyButtonText: {
+    color: 'white',
+    fontSize: 15,
+    fontWeight: '600',
+  },
+  disclaimer: {
+    fontSize: 11,
+    color: '#888888',
+    lineHeight: 16,
+  },
+  creditJourneyCard: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: '#F8F8F8',
-    borderRadius: 16,
-    paddingHorizontal: 20,
-    paddingVertical: 18,
-    marginBottom: 24,
+    margin: 16,
+    padding: 20,
+    backgroundColor: 'white',
+    borderRadius: 12,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.08,
+    shadowRadius: 8,
+    elevation: 4,
     borderWidth: 1,
-    borderColor: '#E8E8E8',
+    borderColor: '#F0F0F0',
   },
-  linkAccountsText: {
+  creditJourneyLeft: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  creditJourneyInfo: {
+    marginLeft: 16,
+  },
+  creditJourneyTitle: {
     fontSize: 17,
     fontWeight: '600',
     color: '#000000',
   },
+  creditJourneySubtitle: {
+    fontSize: 14,
+    color: '#666666',
+    marginTop: 2,
+  },
 });
-
