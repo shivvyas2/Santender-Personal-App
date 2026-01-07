@@ -1,50 +1,119 @@
-# Welcome to your Expo app 👋
+# Santander Personal Banking App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A modern, beautifully designed mobile banking application built with React Native and Expo, featuring a complete Santander-branded UI with credit journey functionality.
 
-## Get started
+## Features
 
-1. Install dependencies
+- 🏦 **Account Management**: View and manage checking, savings, and credit card accounts
+- 💳 **Credit Journey**: Comprehensive credit score tracking with detailed breakdowns, alerts, and personalized offers
+- 💸 **Pay & Transfer**: Send money, pay bills, and transfer between accounts
+- 🎨 **Modern UI**: Clean, modern design with Santander red branding
+- 📱 **Responsive Design**: Optimized for iOS and Android
 
+## Screens
+
+- **Accounts**: View all bank accounts and credit cards with balances
+- **Pay & Transfer**: Quick actions for sending money and paying bills
+- **Credit Journey**: Credit score tracking, alerts, and offers
+- **More**: Settings, support, and additional features
+
+## Tech Stack
+
+- [React Native](https://reactnative.dev/)
+- [Expo](https://expo.dev/)
+- [Expo Router](https://docs.expo.dev/router/introduction/) - File-based routing
+- [TypeScript](https://www.typescriptlang.org/)
+- [React Native SVG](https://github.com/react-native-svg/react-native-svg)
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js (v18 or later)
+- npm or yarn
+- Expo CLI (optional, can use npx)
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone <your-repo-url>
+   cd "Santender Personal App"
+   ```
+
+2. Install dependencies:
    ```bash
    npm install
    ```
 
-2. Start the app
-
+3. Start the development server:
    ```bash
    npx expo start
    ```
 
-In the output, you'll find options to open the app in a
+4. Run on your device:
+   - Press `i` for iOS simulator
+   - Press `a` for Android emulator
+   - Scan QR code with Expo Go app on your physical device
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## Project Structure
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+```
+├── app/                    # Main application screens
+│   ├── (tabs)/            # Tab navigation screens
+│   │   ├── index.tsx      # Accounts screen
+│   │   ├── credit-journey.tsx
+│   │   ├── pay-transfer.tsx
+│   │   └── more.tsx
+│   └── _layout.tsx         # Root layout
+├── components/             # Reusable components
+├── constants/              # Theme and constants
+├── hooks/                  # Custom React hooks
+└── assets/                 # Images and static assets
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## Design System
 
-## Learn more
+- **Primary Color**: Santander Red (`#EC0000`)
+- **Typography**: System fonts with modern weights
+- **Spacing**: Consistent 20px padding, 16-20px margins
+- **Border Radius**: 20px for cards, 16px for buttons
+- **Shadows**: Modern elevation with subtle shadows
 
-To learn more about developing your project with Expo, look at the following resources:
+## Development
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+### Running the App
 
-## Join the community
+```bash
+# Start Expo development server
+npx expo start
 
-Join our community of developers creating universal apps.
+# Run on iOS
+npx expo start --ios
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+# Run on Android
+npx expo start --android
+
+# Run on Web
+npx expo start --web
+```
+
+### Building
+
+```bash
+# Build for production
+npx expo build:android
+npx expo build:ios
+```
+
+## License
+
+This project is for demonstration purposes.
+
+## Contributing
+
+This is a personal project. Feel free to fork and modify for your own use.
+
+---
+
+Built with ❤️ using Expo and React Native
