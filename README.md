@@ -4,11 +4,11 @@ A modern, beautifully designed mobile banking application built with React Nativ
 
 ## Features
 
-- 🏦 **Account Management**: View and manage checking, savings, and credit card accounts
-- 💳 **Credit Journey**: Comprehensive credit score tracking with detailed breakdowns, alerts, and personalized offers
-- 💸 **Pay & Transfer**: Send money, pay bills, and transfer between accounts
-- 🎨 **Modern UI**: Clean, modern design with Santander red branding
-- 📱 **Responsive Design**: Optimized for iOS and Android
+-  **Account Management**: View and manage checking, savings, and credit card accounts
+-  **Credit Journey**: Comprehensive credit score tracking with detailed breakdowns, alerts, and personalized offers
+-  **Pay & Transfer**: Send money, pay bills, and transfer between accounts
+-  **Modern UI**: Clean, modern design with Santander red branding
+
 
 ## Screens
 
