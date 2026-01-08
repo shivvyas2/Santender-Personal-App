@@ -205,16 +205,60 @@ export default function AccountsScreen() {
 
         {/* Offer Card */}
         <View style={styles.offerCard}>
-          <Text style={styles.offerTitle}>Earn up to $600 cash back* on everything</Text>
-          <Text style={styles.offerSubtitle}>Enjoy a low APR* for easy spending and flexibility.</Text>
+          <View style={styles.offerTitleRow}>
+            <View style={styles.carIconContainer}>
+              <Svg width={32} height={32} viewBox="0 0 512 512">
+                <G>
+                  <Path
+                    d="M156,196c0-33.084-26.916-60-60-60s-60,26.916-60,60s26.916,60,60,60S156,229.084,156,196z M91,231v-5H81
+                    c-2.762,0-5-2.238-5-5s2.238-5,5-5h25v-15H81c-2.762,0-5-2.238-5-5v-25c0-2.762,2.238-5,5-5h10v-5c0-2.762,2.238-5,5-5
+                    s5,2.238,5,5v5h10c2.762,0,5,2.238,5,5s-2.238,5-5,5H86v15h25c2.762,0,5,2.238,5,5v25c0,2.762-2.238,5-5,5h-10v5
+                    c0,2.762-2.238,5-5,5S91,233.762,91,231z"
+                    fill="#EC0000"
+                  />
+                  <Path
+                    d="M501,378.699c0-33.056,0-15.354,0-48.199c0-21.78-17.72-39.5-39.5-39.5h-20.111l-23.454-44.56
+                    C408.051,227.664,388.729,216,367.51,216H306V71c0-2.762-2.238-5-5-5H101c-2.762,0-5,2.238-5,5v45c-44.112,0-80,35.888-80,80
+                    s35.888,80,80,80v15H74.3c-19.812,0-38.448,9.301-50.385,25H23.5C13.851,316,6,323.851,6,333.5c0,5.011,2.129,9.525,5.516,12.718
+                    c-0.857,6.71-0.381,9.73-0.516,32.488C5.032,382.17,1,388.616,1,396c0,11.09,9,20,20,20h29.187c7.731,17.641,25.351,30,45.813,30
+                    s38.081-12.359,45.813-30h203.375c7.731,17.641,25.351,30,45.813,30s38.081-12.359,45.813-30H491c11.028,0,20-8.972,20-20
+                    C511,388.705,507.132,382.264,501,378.699z M106,76h190v140h-59.18c-16.56,0-32.563,5.986-45.062,16.857L124.92,291H106v-15.647
+                    c36.128-4.528,64.824-33.225,69.353-69.353H236c2.762,0,5-2.238,5-5s-2.238-5-5-5h-60c0-5.128-0.504-10.138-1.431-15H236
+                    c2.762,0,5-2.238,5-5s-2.238-5-5-5h-64.022c-1.736-5.262-4.004-10.281-6.741-15H271c2.762,0,5-2.238,5-5v-45c0-2.762-2.238-5-5-5
+                    H131c-2.762,0-5,2.238-5,5v15.858c-6.309-2.563-13.015-4.336-20-5.211V76z M26,196c0-38.598,31.402-70,70-70s70,31.402,70,70
+                    s-31.402,70-70,70S26,234.598,26,196z M47.006,406H21c-5.483,0-10-4.453-10-10c0-5.514,4.486-10,10-10h26.006
+                    C45.709,392.367,45.621,399.202,47.006,406z M96,436c-22.056,0-40-17.944-40-40s17.944-40,40-40s40,17.944,40,40
+                    S118.056,436,96,436z M342.006,406H144.994c1.297-6.367,1.385-13.202,0-20h197.012C340.709,392.367,340.621,399.202,342.006,406z
+                     M391,436c-22.056,0-40-17.944-40-40s17.944-40,40-40s40,17.944,40,40S413.056,436,391,436z M391,346
+                    c-20.461,0-38.081,12.359-45.813,30H141.813c-7.731-17.641-25.351-30-45.813-30s-38.081,12.359-45.813,30H21
+                    c0.045-21.813-0.101-21.681,0.124-25.181c2.387,0.326,2.87,0.12,12.376,0.181c9.649,0,17.5-7.851,17.5-17.5
+                    c0-8.486-6.073-15.575-14.1-17.163C46.781,306.606,60.187,301,74.3,301h52.49c1.206,0,2.371-0.436,3.281-1.228l68.25-59.37
+                    C209,231.115,222.673,226,236.82,226H367.51c17.495,0,33.427,9.617,41.575,25.099l24.86,47.23
+                    c0.865,1.643,2.568,2.671,4.425,2.671h23.13c16.267,0,29.5,13.233,29.5,29.5v5.5h-10c-8.271,0-15,6.729-15,15s6.729,15,15,15h10
+                    v10h-54.187C429.081,358.359,411.461,346,391,346z M491,406h-51.006c1.297-6.367,1.385-13.202,0-20H491c5.483,0,10,4.453,10,10
+                    C501,401.514,496.514,406,491,406z"
+                    fill="#EC0000"
+                  />
+                  <Circle cx="96" cy="396" r="20" fill="#EC0000" />
+                  <Circle cx="391" cy="396" r="20" fill="#EC0000" />
+                  <Path
+                    d="M397.582 257.153C391.687 245.956 380.164 239 367.51 239h-130.69c-11.012 0-21.654 3.981-29.967 11.212l-48.3 42.016c-1.574 1.369-2.133 3.571-1.401 5.524.73 1.953 2.597 3.248 4.683 3.248 40.063 0 217.256 0 250.545 0 3.759 0 6.174-4.004 4.425-7.329L397.582 257.153zM266 291h-90.8l38.215-33.243c6.492-5.646 14.805-8.757 23.404-8.757H266V291zM361 291h-65v-42h65V291zM371 291v-41.742c7.519 1.097 14.122 5.695 17.732 12.553L404.097 291H371zM266 326h-10c-2.762 0-5 2.238-5 5s2.238 5 5 5h10c2.762 0 5-2.238 5-5S268.762 326 266 326z"
+                    fill="#EC0000"
+                  />
+                </G>
+              </Svg>
+            </View>
+            <Text style={styles.offerTitle}>Pre approved up to $75,000. Auto Loan.</Text>
+          </View>
+          <Text style={styles.offerSubtitle}>Get competitive rates and flexible terms for your next vehicle.</Text>
           <Text style={styles.offerDescription}>
-            The Santander® Ultimate Cash Back® Card lets you pay smarter while earning 3% cash back on every purchase. With a low intro APR and no annual fee, managing your balance has never been more rewarding.
+            You're pre-approved for an auto loan up to $75,000. Enjoy competitive rates, flexible repayment terms, and quick approval. Finance your new or used vehicle with confidence.
           </Text>
           <TouchableOpacity style={styles.applyButton}>
-            <Text style={styles.applyButtonText}>Apply Now</Text>
+            <Text style={styles.applyButtonText}>Pre Qualify</Text>
           </TouchableOpacity>
           <Text style={styles.disclaimer}>
-            *Credit card accounts are subject to approval. Click 'Apply Now' for applicable terms and conditions.
+            *Auto loan offers are subject to approval. Click 'Pre Qualify' for applicable terms and conditions.
           </Text>
         </View>
       </ScrollView>
@@ -426,11 +470,20 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#F0F0F0',
   },
+  offerTitleRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 8,
+  },
+  carIconContainer: {
+    marginRight: 12,
+    padding: 4,
+  },
   offerTitle: {
     fontSize: 20,
     fontWeight: '400',
     color: '#EC0000',
-    marginBottom: 8,
+    flex: 1,
     lineHeight: 26,
   },
   offerSubtitle: {

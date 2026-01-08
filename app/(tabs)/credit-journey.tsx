@@ -680,7 +680,7 @@ export default function CreditJourneyScreen() {
 
                 {/* Card Number */}
                 <View style={styles.cardNumberSection}>
-                  <Text style={styles.cardNumber}>5000 1234 5678 9010</Text>
+                  <Text style={styles.cardNumber}>**** **** **** 9010</Text>
                 </View>
 
                 {/* Cardholder Name */}
