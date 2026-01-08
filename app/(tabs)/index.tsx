@@ -3,9 +3,35 @@ import { useRouter } from 'expo-router';
 import React from 'react';
 import { ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import Svg, { Circle, G, Path } from 'react-native-svg';
 
 export default function AccountsScreen() {
   const router = useRouter();
+
+  // Credit score data
+  const creditScore = 710;
+  const scoreCategory = 'Excellent'; // 710 is in Excellent range (700+)
+  const scoreChange = 12;
+  const scoreChangeDirection = 'up';
+
+  // Calculate score color based on FICO range
+  const getScoreColor = (score: number) => {
+    if (score >= 700) return '#4ECB71'; // Excellent
+    if (score >= 670) return '#FFD93D'; // Good
+    if (score >= 580) return '#FFA94D'; // Fair
+    return '#EC0000'; // Poor
+  };
+  const scoreColor = getScoreColor(creditScore);
+
+  // Calculate indicator position for gauge (710 is ~74.5% of 300-850 range)
+  const minScore = 300;
+  const maxScore = 850;
+  const scoreRange = maxScore - minScore;
+  const progress = (creditScore - minScore) / scoreRange; // 0.745
+  const indicatorAngle = 180 * progress; // ~134 degrees
+  const indicatorRadius = 37;
+  const indicatorX = 50 + indicatorRadius * Math.cos((indicatorAngle - 90) * Math.PI / 180);
+  const indicatorY = 50 + indicatorRadius * Math.sin((indicatorAngle - 90) * Math.PI / 180);
 
   return (
     <SafeAreaView style={styles.container} edges={['top']}>
@@ -56,10 +82,9 @@ export default function AccountsScreen() {
         <View style={styles.accountCard}>
           <Text style={styles.accountType}>Select Checking (*7525)</Text>
           <View style={styles.balanceRow}>
-            <Text style={styles.balancePrefix}>-</Text>
             <Text style={styles.balanceDollar}>$</Text>
-            <Text style={styles.balanceAmount}>218.</Text>
-            <Text style={styles.balanceCents}>25</Text>
+            <Text style={styles.balanceAmount}>8,429.</Text>
+            <Text style={styles.balanceCents}>67</Text>
           </View>
           <Text style={styles.balanceLabel}>AVAILABLE BALANCE</Text>
         </View>
@@ -68,6 +93,106 @@ export default function AccountsScreen() {
         <TouchableOpacity style={styles.openAccountButton}>
           <IconSymbol name="plus" size={18} color="#EC0000" />
           <Text style={styles.openAccountText}>Open an Account</Text>
+        </TouchableOpacity>
+
+        {/* Credit Score Widget */}
+        <TouchableOpacity 
+          style={styles.creditScoreWidget}
+          onPress={() => router.push('/credit-journey')}
+          activeOpacity={0.9}
+        >
+          <View style={styles.widgetHeader}>
+            <View style={styles.widgetTitleRow}>
+              <Text style={styles.widgetTitle}>Credit Journey</Text>
+              <View style={styles.freeTag}>
+                <Text style={styles.freeTagText}>FREE</Text>
+              </View>
+            </View>
+            <IconSymbol name="chevron.right" size={18} color="#888888" />
+          </View>
+          
+          <View style={styles.widgetContent}>
+            {/* Mini Gauge - Semicircular */}
+            <View style={styles.miniGaugeContainer}>
+              <Svg width={100} height={58} viewBox="0 0 100 58">
+                <G>
+                  {/* Background track */}
+                  <Path
+                    d="M 10 52 A 40 40 0 0 1 90 52"
+                    fill="none"
+                    stroke="#EEEEEE"
+                    strokeWidth="8"
+                    strokeLinecap="round"
+                  />
+                  {/* Red segment (Poor) */}
+                  <Path
+                    d="M 10 52 A 40 40 0 0 1 22 22"
+                    fill="none"
+                    stroke="#EC0000"
+                    strokeWidth="8"
+                    strokeLinecap="round"
+                  />
+                  {/* Orange segment (Fair) */}
+                  <Path
+                    d="M 26 17 A 40 40 0 0 1 45 10"
+                    fill="none"
+                    stroke="#FFA94D"
+                    strokeWidth="8"
+                  />
+                  {/* Yellow segment (Good) */}
+                  <Path
+                    d="M 50 9 A 40 40 0 0 1 70 14"
+                    fill="none"
+                    stroke="#FFD93D"
+                    strokeWidth="8"
+                  />
+                  {/* Green segment (Excellent) */}
+                  <Path
+                    d="M 75 20 A 40 40 0 0 1 90 52"
+                    fill="none"
+                    stroke="#4ECB71"
+                    strokeWidth="8"
+                    strokeLinecap="round"
+                  />
+                  {/* Needle indicator at score position (710 = ~74.5%) */}
+                  <Circle
+                    cx={indicatorX}
+                    cy={indicatorY}
+                    r="5"
+                    fill="white"
+                    stroke={scoreColor}
+                    strokeWidth="2"
+                  />
+                </G>
+              </Svg>
+              <View style={styles.gaugeLabelRow}>
+                <Text style={styles.gaugeLabel}>300</Text>
+                <Text style={styles.gaugeLabel}>850</Text>
+              </View>
+            </View>
+            
+            {/* Score Display */}
+            <View style={styles.scoreDisplay}>
+              <Text style={styles.scoreValue}>{creditScore}</Text>
+              <View style={styles.scoreDetails}>
+                <View style={styles.scoreLabelBadge}>
+                  <View style={[styles.scoreIndicatorDot, { backgroundColor: scoreColor }]} />
+                  <Text style={styles.scoreLabelText}>{scoreCategory}</Text>
+                </View>
+                <Text style={styles.scoreProvider}>FICO® Score 8</Text>
+              </View>
+            </View>
+            
+            {/* Score Change */}
+            <View style={styles.scoreChangeWidget}>
+              <IconSymbol name={scoreChangeDirection === 'up' ? 'arrow.up' : 'arrow.down'} size={12} color={scoreChangeDirection === 'up' ? '#4ECB71' : '#EC0000'} />
+              <Text style={[styles.scoreChangeTextWidget, { color: scoreChangeDirection === 'up' ? '#4ECB71' : '#EC0000' }]}>{scoreChange} pts</Text>
+            </View>
+          </View>
+          
+          <View style={styles.widgetFooter}>
+            <Text style={styles.widgetFooterText}>Updated Jan 5, 2026 • Tap to view details</Text>
+          </View>
         </TouchableOpacity>
 
         {/* Messages and Offers Section */}
@@ -92,21 +217,6 @@ export default function AccountsScreen() {
             *Credit card accounts are subject to approval. Click 'Apply Now' for applicable terms and conditions.
           </Text>
         </View>
-
-        {/* Credit Journey Link */}
-        <TouchableOpacity 
-          style={styles.creditJourneyCard}
-          onPress={() => router.push('/credit-journey')}
-        >
-          <View style={styles.creditJourneyLeft}>
-            <IconSymbol name="chart.bar.fill" size={24} color="#EC0000" />
-            <View style={styles.creditJourneyInfo}>
-              <Text style={styles.creditJourneyTitle}>Credit Journey</Text>
-              <Text style={styles.creditJourneySubtitle}>Check your credit score for free</Text>
-            </View>
-          </View>
-          <IconSymbol name="chevron.right" size={20} color="#888888" />
-        </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
   );
@@ -250,27 +360,21 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     marginBottom: 8,
   },
-  balancePrefix: {
-    fontSize: 32,
-    fontWeight: '300',
-    color: '#EC0000',
-    marginRight: 2,
-  },
   balanceDollar: {
     fontSize: 20,
     fontWeight: '300',
-    color: '#EC0000',
+    color: '#000000',
     marginTop: 4,
   },
   balanceAmount: {
     fontSize: 48,
     fontWeight: '300',
-    color: '#EC0000',
+    color: '#000000',
   },
   balanceCents: {
     fontSize: 20,
     fontWeight: '300',
-    color: '#EC0000',
+    color: '#000000',
     marginTop: 4,
   },
   balanceLabel: {
@@ -359,37 +463,128 @@ const styles = StyleSheet.create({
     color: '#888888',
     lineHeight: 16,
   },
-  creditJourneyCard: {
+  creditScoreWidget: {
+    margin: 16,
+    backgroundColor: 'white',
+    borderRadius: 16,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.1,
+    shadowRadius: 12,
+    elevation: 6,
+    borderWidth: 1,
+    borderColor: '#F0F0F0',
+    overflow: 'hidden',
+  },
+  widgetHeader: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    margin: 16,
-    padding: 20,
-    backgroundColor: 'white',
-    borderRadius: 12,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.08,
-    shadowRadius: 8,
-    elevation: 4,
-    borderWidth: 1,
-    borderColor: '#F0F0F0',
+    paddingHorizontal: 16,
+    paddingTop: 16,
+    paddingBottom: 12,
   },
-  creditJourneyLeft: {
+  widgetTitleRow: {
     flexDirection: 'row',
     alignItems: 'center',
+    gap: 8,
   },
-  creditJourneyInfo: {
-    marginLeft: 16,
-  },
-  creditJourneyTitle: {
-    fontSize: 17,
-    fontWeight: '600',
+  widgetTitle: {
+    fontSize: 18,
+    fontWeight: '700',
     color: '#000000',
   },
-  creditJourneySubtitle: {
-    fontSize: 14,
-    color: '#666666',
+  freeTag: {
+    backgroundColor: '#E8F5E9',
+    paddingHorizontal: 8,
+    paddingVertical: 3,
+    borderRadius: 4,
+  },
+  freeTagText: {
+    fontSize: 10,
+    fontWeight: '700',
+    color: '#4ECB71',
+    letterSpacing: 0.5,
+  },
+  widgetContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 16,
+    paddingBottom: 16,
+    gap: 12,
+  },
+  miniGaugeContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 100,
+  },
+  gaugeLabelRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: 86,
     marginTop: 2,
+  },
+  gaugeLabel: {
+    fontSize: 10,
+    color: '#999999',
+    fontWeight: '600',
+  },
+  scoreDisplay: {
+    flex: 1,
+  },
+  scoreValue: {
+    fontSize: 42,
+    fontWeight: '300',
+    color: '#000000',
+    letterSpacing: -1,
+  },
+  scoreDetails: {
+    marginTop: -4,
+  },
+  scoreLabelBadge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+  },
+  scoreIndicatorDot: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+  },
+  scoreLabelText: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: '#666666',
+  },
+  scoreProvider: {
+    fontSize: 11,
+    color: '#AAAAAA',
+    marginTop: 2,
+  },
+  scoreChangeWidget: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#FFEBEB',
+    paddingHorizontal: 10,
+    paddingVertical: 6,
+    borderRadius: 8,
+    gap: 4,
+  },
+  scoreChangeTextWidget: {
+    fontSize: 13,
+    fontWeight: '600',
+    color: '#EC0000',
+  },
+  widgetFooter: {
+    backgroundColor: '#FAFAFA',
+    paddingVertical: 10,
+    paddingHorizontal: 16,
+    borderTopWidth: 1,
+    borderTopColor: '#F0F0F0',
+  },
+  widgetFooterText: {
+    fontSize: 12,
+    color: '#888888',
+    textAlign: 'center',
   },
 });

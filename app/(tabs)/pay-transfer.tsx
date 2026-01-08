@@ -128,16 +128,16 @@ export default function PayTransferScreen() {
           </View>
           <View style={styles.cardContent}>
             <TouchableOpacity style={styles.featureItem}>
-              <IconSymbol name="arrow.up.right" size={24} color="#00AA00" />
+              <IconSymbol name="arrow.down.left" size={24} color="#00AA00" />
               <View style={styles.transactionInfo}>
-                <Text style={styles.transactionText}>Sent to John Doe</Text>
+                <Text style={styles.transactionText}>Received from John Doe</Text>
                 <Text style={styles.transactionDate}>Today, 2:30 PM</Text>
               </View>
-              <Text style={styles.transactionAmount}>-$150.00</Text>
+              <Text style={styles.transactionAmount}>+$150.00</Text>
             </TouchableOpacity>
             
             <TouchableOpacity style={styles.featureItem}>
-              <IconSymbol name="arrow.down.left" size={24} color="#EC0000" />
+              <IconSymbol name="arrow.down.left" size={24} color="#00AA00" />
               <View style={styles.transactionInfo}>
                 <Text style={styles.transactionText}>Deposit from ABC Corp</Text>
                 <Text style={styles.transactionDate}>Yesterday, 9:15 AM</Text>
@@ -151,7 +151,7 @@ export default function PayTransferScreen() {
                 <Text style={styles.transactionText}>Credit card payment</Text>
                 <Text style={styles.transactionDate}>2 days ago</Text>
               </View>
-              <Text style={styles.transactionAmount}>-$89.50</Text>
+              <Text style={styles.transactionAmount}>+$89.50</Text>
             </TouchableOpacity>
           </View>
         </View>

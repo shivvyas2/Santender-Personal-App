@@ -114,15 +114,15 @@ export default function TransferScreen() {
 
           <View style={styles.activityCard}>
             <View style={styles.activityLeft}>
-              <View style={[styles.activityIcon, { backgroundColor: '#FFE8E8' }]}>
-                <IconSymbol name="arrow.up" size={16} color="#EC0000" />
+              <View style={[styles.activityIcon, { backgroundColor: '#E8FFE8' }]}>
+                <IconSymbol name="arrow.down" size={16} color="#00AA00" />
               </View>
               <View style={styles.activityInfo}>
-                <Text style={styles.activityName}>Sent to John Doe</Text>
+                <Text style={styles.activityName}>Received from John Doe</Text>
                 <Text style={styles.activityDate}>Today, 2:30 PM</Text>
               </View>
             </View>
-            <Text style={[styles.activityAmount, { color: '#EC0000' }]}>-$150.00</Text>
+            <Text style={[styles.activityAmount, { color: '#00AA00' }]}>+$150.00</Text>
           </View>
 
           <View style={styles.activityCard}>
@@ -341,4 +341,5 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
 });
+
 

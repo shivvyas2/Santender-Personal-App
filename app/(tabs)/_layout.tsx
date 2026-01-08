@@ -1,6 +1,6 @@
 import { Tabs } from 'expo-router';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Platform, StyleSheet, Text, View } from 'react-native';
 
 import { HapticTab } from '@/components/haptic-tab';
 import { IconSymbol } from '@/components/ui/icon-symbol';
@@ -10,23 +10,25 @@ export default function TabLayout() {
     <Tabs
       screenOptions={{
         tabBarActiveTintColor: '#EC0000',
-        tabBarInactiveTintColor: '#666666',
+        tabBarInactiveTintColor: '#888888',
         headerShown: false,
         tabBarButton: HapticTab,
         tabBarStyle: {
           backgroundColor: 'white',
           borderTopWidth: 1,
-          borderTopColor: '#F0F0F0',
-          height: 85,
-          paddingBottom: 25,
-          paddingTop: 10,
+          borderTopColor: '#EEEEEE',
+          height: Platform.OS === 'ios' ? 88 : 70,
+          paddingBottom: Platform.OS === 'ios' ? 28 : 10,
+          paddingTop: 8,
+          paddingHorizontal: 4,
         },
         tabBarLabelStyle: {
           fontSize: 10,
-          fontWeight: '600',
-          marginTop: 4,
-          textTransform: 'uppercase',
-          letterSpacing: 0.3,
+          fontWeight: '500',
+          marginTop: 2,
+        },
+        tabBarItemStyle: {
+          paddingTop: 4,
         },
       }}>
       <Tabs.Screen
@@ -34,8 +36,9 @@ export default function TabLayout() {
         options={{
           title: 'Accounts',
           tabBarIcon: ({ color, focused }) => (
-            <View style={[styles.iconContainer, focused && styles.activeIconContainer]}>
-              <IconSymbol size={22} name="banknote" color={focused ? '#EC0000' : color} />
+            <View style={styles.iconWrapper}>
+              {focused && <View style={styles.activeIndicator} />}
+              <IconSymbol size={24} name="banknote" color={color} />
             </View>
           ),
         }}
@@ -43,10 +46,11 @@ export default function TabLayout() {
       <Tabs.Screen
         name="products"
         options={{
-          title: 'Our Products',
+          title: 'Products',
           tabBarIcon: ({ color, focused }) => (
-            <View style={[styles.iconContainer, focused && styles.activeIconContainer]}>
-              <IconSymbol size={22} name="building.columns" color={focused ? '#EC0000' : color} />
+            <View style={styles.iconWrapper}>
+              {focused && <View style={styles.activeIndicator} />}
+              <IconSymbol size={24} name="building.columns" color={color} />
             </View>
           ),
         }}
@@ -56,10 +60,9 @@ export default function TabLayout() {
         options={{
           title: '',
           tabBarIcon: ({ focused }) => (
-            <View style={styles.centerButton}>
-              <View style={styles.centerButtonInner}>
-                <IconSymbol size={24} name="arrow.left.arrow.right" color="#666666" />
-                <Text style={styles.dollarSign}>$</Text>
+            <View style={styles.centerButtonWrapper}>
+              <View style={[styles.centerButton, focused && styles.centerButtonActive]}>
+                <IconSymbol size={26} name="arrow.left.arrow.right" color={focused ? 'white' : '#EC0000'} />
               </View>
             </View>
           ),
@@ -70,8 +73,9 @@ export default function TabLayout() {
         options={{
           title: 'Locations',
           tabBarIcon: ({ color, focused }) => (
-            <View style={[styles.iconContainer, focused && styles.activeIconContainer]}>
-              <IconSymbol size={22} name="location" color={focused ? '#EC0000' : color} />
+            <View style={styles.iconWrapper}>
+              {focused && <View style={styles.activeIndicator} />}
+              <IconSymbol size={24} name="location" color={color} />
             </View>
           ),
         }}
@@ -81,8 +85,9 @@ export default function TabLayout() {
         options={{
           title: 'Messages',
           tabBarIcon: ({ color, focused }) => (
-            <View style={[styles.iconContainer, focused && styles.activeIconContainer]}>
-              <IconSymbol size={22} name="message" color={focused ? '#EC0000' : color} />
+            <View style={styles.iconWrapper}>
+              {focused && <View style={styles.activeIndicator} />}
+              <IconSymbol size={24} name="message" color={color} />
               <View style={styles.badge}>
                 <Text style={styles.badgeText}>5</Text>
               </View>
@@ -94,19 +99,19 @@ export default function TabLayout() {
       <Tabs.Screen
         name="credit-journey"
         options={{
-          href: null, // Hidden from tab bar
+          href: null,
         }}
       />
       <Tabs.Screen
         name="more"
         options={{
-          href: null, // Hidden from tab bar
+          href: null,
         }}
       />
       <Tabs.Screen
         name="pay-transfer"
         options={{
-          href: null, // Hidden from tab bar
+          href: null,
         }}
       />
     </Tabs>
@@ -114,62 +119,65 @@ export default function TabLayout() {
 }
 
 const styles = StyleSheet.create({
-  iconContainer: {
+  iconWrapper: {
     alignItems: 'center',
     justifyContent: 'center',
-    paddingTop: 4,
+    width: 50,
+    height: 30,
+    position: 'relative',
   },
-  activeIconContainer: {
-    borderTopWidth: 2,
-    borderTopColor: '#EC0000',
-    marginTop: -2,
-    paddingTop: 6,
+  activeIndicator: {
+    position: 'absolute',
+    top: -8,
+    width: 24,
+    height: 3,
+    backgroundColor: '#EC0000',
+    borderRadius: 2,
+  },
+  centerButtonWrapper: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: -24,
   },
   centerButton: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: -30,
-  },
-  centerButtonInner: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
+    width: 56,
+    height: 56,
+    borderRadius: 28,
     backgroundColor: 'white',
     alignItems: 'center',
     justifyContent: 'center',
-    shadowColor: '#000',
+    shadowColor: '#EC0000',
     shadowOffset: {
       width: 0,
-      height: 2,
+      height: 4,
     },
-    shadowOpacity: 0.15,
+    shadowOpacity: 0.2,
     shadowRadius: 8,
     elevation: 8,
-    borderWidth: 1,
-    borderColor: '#E8E8E8',
+    borderWidth: 2,
+    borderColor: '#EC0000',
   },
-  dollarSign: {
-    position: 'absolute',
-    fontSize: 14,
-    fontWeight: '700',
-    color: '#666666',
-    bottom: 8,
+  centerButtonActive: {
+    backgroundColor: '#EC0000',
+    borderColor: '#EC0000',
   },
   badge: {
     position: 'absolute',
-    top: -2,
-    right: -10,
+    top: -4,
+    right: 2,
     backgroundColor: '#EC0000',
-    borderRadius: 10,
+    borderRadius: 9,
     minWidth: 18,
     height: 18,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingHorizontal: 4,
+    paddingHorizontal: 5,
+    borderWidth: 2,
+    borderColor: 'white',
   },
   badgeText: {
     color: 'white',
-    fontSize: 11,
+    fontSize: 10,
     fontWeight: '700',
   },
 });
